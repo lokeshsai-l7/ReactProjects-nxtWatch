@@ -1,13 +1,14 @@
 import styled from 'styled-components';
 
 export const NavBar = styled.nav`
+  height: 10vh;
   width: 100%;
   background-color: ${(props) => (props.$darkTheme ? '#181818' : '#ffffff')};
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 100%;
   padding: 20px;
+  height: 10vh;
   @media screen and (min-width: 768px) {
     padding: 20px 40px 20px 40px;
   }

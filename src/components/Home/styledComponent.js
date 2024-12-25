@@ -1,23 +1,24 @@
 import styled from 'styled-components';
 
 export const DataDisplayContainer = styled.div`
+  background-color: ${(props) => (props.$darkTheme ? '#000000' : '#f1f1f1')};
   display: flex;
-  min-height: 100vh;
+  height: 90vh;
   @media screen and (max-width: 768px) {
     width: 100%;
-    min-height: 90vh;
   }
   width: 80%;
   flex-direction: column;
+  overflow-y: auto;
+  &::-webkit-scrollbar {
+    display: none;
+  }
 `;
 
 export const BannerContainer = styled.div`
   padding: 40px;
   width: 100%;
-  height: 30vh;
-  @media screen and (max-width: 768px) {
-    height: 200px;
-  }
+  height: 25vh;
   background-image: url('https://assets.ccbp.in/frontend/react-js/nxt-watch-banner-bg.png');
   background-size: cover;
   position: relative;
@@ -61,12 +62,9 @@ export const GetItNow = styled.button`
 `;
 
 export const DataContainer = styled.div`
-  background-color: ${(props) => (props.$darkTheme ? '#000000' : '#f1f1f1')};
   padding: 30px;
-  min-height: 90vh;
-  @media screen and (min-width: 768px) {
-    min-height: 60vh;
-  }
+  min-height: 65vh;
+  max-height: 90vh;
 `;
 
 export const SearchContainer = styled.div`
@@ -108,13 +106,7 @@ export const VideoContainer = styled.div`
   margin-top: 20px;
   margin-bottom: 20px;
   width: 100%;
-  max-height: 90vh;
-  overflow-y: auto;
-  &::-webkit-scrollbar {
-    display: none;
-  }
   @media screen and (min-width: 768px) {
-    height: ${(props) => (props.$close ? '90vh' : '60vh')};
     margin-top: 8px;
   }
 `;
@@ -129,60 +121,4 @@ export const VideosList = styled.ul`
     flex-direction: row;
     flex-wrap: wrap;
   }
-`;
-
-export const FailedViewContainer = styled.div`
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  max-height: 90vh;
-`;
-
-export const FailedViewImage = styled.img`
-  width: 220px;
-  @media screen and (min-width: 768px) {
-    width: 300px;
-  }
-`;
-
-export const FailedViewHeading = styled.h1`
-  color: ${(props) => (props.$darkTheme ? '#f9f9f9' : '#1e293b')};
-  font-family: 'Roboto';
-  font-size: 24px;
-  text-align: center;
-  @media screen and (min-width: 768px) {
-    font-size: 32px;
-  }
-`;
-
-export const FailedViewDesc = styled.p`
-  color: ${(props) => (props.$darkTheme ? '#64748b' : '#475569')};
-  font-family: 'Roboto';
-  font-size: 16px;
-  text-align: center;
-  @media screen and (min-width: 768px) {
-    font-size: 20px;
-  }
-`;
-
-export const RetryBtn = styled.button`
-  color: #ffffff;
-  background-color: #4f46e5;
-  border: none;
-  border-radius: 5px;
-  outline: none;
-  hover: cursor;
-  font-family: 'Roboto';
-  font-size: 16px;
-  padding: 10px 20px 10px 20px;
-`;
-
-export const Loader = styled.div`
-  width: 100%;
-  height: 70vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
 `;

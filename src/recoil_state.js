@@ -2,7 +2,7 @@ import { atom } from 'recoil';
 
 export const themeState = atom({
   key: 'darkTheme',
-  default: true,
+  default: false,
 });
 
 export const activeButtonAtom = atom({

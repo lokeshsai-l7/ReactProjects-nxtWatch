@@ -3,6 +3,8 @@ import Login from './components/Login/index';
 import Home from './components/Home/index';
 import Layout from './components/Layout/index';
 import Gaming from './components/Gaming/index';
+import Trending from './components/Trending/index';
+import VideoItemDetails from './components/VideoItemDetails';
 
 const App = () => (
   <BrowserRouter>
@@ -15,6 +17,8 @@ const App = () => (
             <Routes>
               <Route exact path="/" element={<Home />} />
               <Route exact path="/gaming" element={<Gaming />} />
+              <Route exact path="/trending" element={<Trending />} />
+              <Route exact path="/videos/:id" element={<VideoItemDetails />} />
             </Routes>
           </Layout>
         }

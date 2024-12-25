@@ -1,11 +1,11 @@
 import styled from 'styled-components';
 
 export const Card = styled.li`
-  width: 40%;
+  width: 150px;
   flex-grow: 1;
   margin: 5px 5px 20px 5px;
   @media screen and (min-width: 768px) {
-    width: 240px;
+    width: 260px;
     margin: 10px 10px 30px 10px;
   }
 `;

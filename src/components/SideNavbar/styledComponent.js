@@ -11,6 +11,7 @@ export const SideNavBar = styled.nav`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  height: 90vh;
 `;
 
 export const NavList = styled.ul`

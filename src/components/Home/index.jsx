@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import Cookies from 'js-cookie';
 import { RiCloseLargeFill } from 'react-icons/ri';
 import { FaSearch } from 'react-icons/fa';
-import { ThreeDots } from 'react-loader-spinner';
+
 import {
   DataDisplayContainer,
   BannerContainer,
@@ -15,16 +15,12 @@ import {
   SearchInput,
   SearchImgBtn,
   VideoContainer,
-  Loader,
   VideosList,
-  FailedViewContainer,
-  FailedViewImage,
-  FailedViewHeading,
-  FailedViewDesc,
-  RetryBtn,
 } from './styledComponent.js';
 
 import VideoCard from '../VideoCard/index.jsx';
+import Loader from '../Loader/index.jsx';
+import FailureView from '../FailureView/index.jsx';
 import { themeState } from '../../recoil_state';
 import { useRecoilValue } from 'recoil';
 import axios from 'axios';
@@ -65,14 +61,6 @@ const Home = () => {
     </FailedViewContainer>
   );
 
-  const renderLoader = () => {
-    return (
-      <Loader>
-        <ThreeDots color="#3b82f6" height="50" width="50" />
-      </Loader>
-    );
-  };
-
   const renderVideos = () => {
     return (
       <VideosList>
@@ -83,33 +71,16 @@ const Home = () => {
     );
   };
 
-  const renderFailureView = () => (
-    <FailedViewContainer>
-      <FailedViewImage
-        alt="failed view"
-        src={
-          darkTheme
-            ? 'https://assets.ccbp.in/frontend/react-js/nxt-watch-failure-view-dark-theme-img.png'
-            : 'https://assets.ccbp.in/frontend/react-js/nxt-watch-failure-view-light-theme-img.png'
-        }
-      />
-      <FailedViewHeading $darkTheme={darkTheme}>
-        Oops! Something Went Wrong
-      </FailedViewHeading>
-      <FailedViewDesc $darkTheme={darkTheme}>
-        We are having some trouble to complete your request. Please try again.
-      </FailedViewDesc>
-      <RetryBtn onClick={getVideosData} type="button">
-        Retry
-      </RetryBtn>
-    </FailedViewContainer>
-  );
-
   const onClickEnter = (event) => {
     if (event.key === 'Enter') {
       getVideosData();
     }
   };
+
+  const onClickRetry = () => {
+    getVideosData();
+  };
+
   const getVideosView = () => {
     switch (apiStatus) {
       case apiConstants.success:
@@ -118,9 +89,9 @@ const Home = () => {
         }
         return renderNoSearchResultsView();
       case apiConstants.inProgress:
-        return renderLoader();
+        return <Loader />;
       case apiConstants.failure:
-        return renderFailureView();
+        return <FailureView onClickRetry={onClickRetry} />;
       default:
         return null;
     }
@@ -196,7 +167,7 @@ const Home = () => {
   };
 
   return (
-    <DataDisplayContainer>
+    <DataDisplayContainer $darkTheme={darkTheme}>
       {renderBanner()}
       {renderDataContainer()}
     </DataDisplayContainer>

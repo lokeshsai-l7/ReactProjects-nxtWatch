@@ -1,20 +1,20 @@
 import Cookies from 'js-cookie';
-import { SiYoutubegaming } from 'react-icons/si';
-import GameCard from '../GameCard/index';
-import { useState, useEffect } from 'react';
+import { HiFire } from 'react-icons/hi';
 import { themeState } from '../../recoil_state.js';
 import { useRecoilValue } from 'recoil';
 import axios from 'axios';
-import RouteHeader from '../RouteHeader/index.jsx';
+import { useState, useEffect } from 'react';
 import Loader from '../Loader/index.jsx';
 import FailureView from '../FailureView/index.jsx';
+import RouteHeader from '../RouteHeader/index';
+import TrendingCard from '../TrendingCard/index';
 
 import {
   DataDisplayContainer,
   DataContainer,
-  GamingVideoContainer,
-  GamingVideosList,
-} from './styledComponent.js';
+  TrendingVideoContainer,
+  TrendingVideosList,
+} from './styledComponent';
 
 const appConstants = {
   initial: 'INITIAL',
@@ -23,24 +23,24 @@ const appConstants = {
   failure: 'FAILURE',
 };
 
-const Gaming = () => {
-  const [gamingVideosData, setGamingVideosData] = useState([]);
+const Trending = () => {
+  const [trendingVideosData, setTrendingVideosData] = useState([]);
   const [appStatus, setAppStatus] = useState(appConstants.inProgress);
   const darkTheme = useRecoilValue(themeState);
 
   useEffect(() => {
-    getGamingVideosData();
+    getTrendingVideosData();
   }, []);
 
   const tryAgain = () => {
     setAppStatus(appConstants.initial);
-    getGamingVideosData();
+    getTrendingVideosData();
   };
 
-  const getGamingVideosData = async () => {
+  const getTrendingVideosData = async () => {
     setAppStatus(appConstants.inProgress);
     const jwtToken = Cookies.get('jwt_token');
-    const url = `https://apis.ccbp.in/videos/gaming`;
+    const url = `https://apis.ccbp.in/videos/trending`;
     try {
       const response = await axios.get(url, {
         headers: {
@@ -48,32 +48,37 @@ const Gaming = () => {
         },
       });
       const { data } = response;
+      console.log(data);
       const updatedData = data.videos.map((eachObj) => ({
+        channel: {
+          name: eachObj.channel.name,
+          profileImageUrl: eachObj.channel.profile_image_url,
+        },
+        publishedAt: eachObj.published_at,
         id: eachObj.id,
         thumbnailUrl: eachObj.thumbnail_url,
         title: eachObj.title,
         viewCount: eachObj.view_count,
       }));
-      console.log(updatedData);
       setAppStatus(appConstants.success);
-      setGamingVideosData(updatedData);
+      setTrendingVideosData(updatedData);
     } catch (error) {
       setAppStatus(appConstants.failure);
     }
   };
 
-  const renderGamingVideos = () => (
-    <GamingVideosList>
-      {gamingVideosData.map((eachObj) => (
-        <GameCard key={eachObj.id} videoData={eachObj} />
+  const renderTrendingVideos = () => (
+    <TrendingVideosList>
+      {trendingVideosData.map((eachObj) => (
+        <TrendingCard key={eachObj.id} videoData={eachObj} />
       ))}
-    </GamingVideosList>
+    </TrendingVideosList>
   );
 
   const getVideosView = () => {
     switch (appStatus) {
       case appConstants.success:
-        return renderGamingVideos();
+        return renderTrendingVideos();
       case appConstants.inProgress:
         return <Loader />;
       case appConstants.failure:
@@ -85,11 +90,10 @@ const Gaming = () => {
 
   const renderDataContainer = () => (
     <DataContainer>
-      <RouteHeader name={'Gaming'} icon={<SiYoutubegaming />} />
-      <GamingVideoContainer>{getVideosView()}</GamingVideoContainer>
+      <RouteHeader name={'Trending'} icon={<HiFire />} />
+      <TrendingVideoContainer>{getVideosView()}</TrendingVideoContainer>
     </DataContainer>
   );
-
   return (
     <DataDisplayContainer $darkTheme={darkTheme}>
       {renderDataContainer()}
@@ -97,4 +101,4 @@ const Gaming = () => {
   );
 };
 
-export default Gaming;
+export default Trending;

@@ -16,20 +16,20 @@ export const DataDisplayContainer = styled.div`
 
 export const DataContainer = styled.div`
   height: 80vh;
+  }
 `;
 
-export const GamingVideoContainer = styled.div`
+export const TrendingVideoContainer = styled.div`
   padding: 20px;
   margin-top: 10px;
   margin-bottom: 20px;
   width: 100%;
 `;
 
-export const GamingVideosList = styled.ul`
+export const TrendingVideosList = styled.ul`
   width: 100%;
   list-style-type: none;
   padding-left: 0px;
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-between;
 `;
