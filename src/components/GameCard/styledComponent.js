@@ -16,16 +16,22 @@ export const ThumbnailImg = styled.img`
 `;
 
 export const Title = styled.h1`
-  color: #1e293b;
+  color: ${(props) => (props.$darkTheme ? '#f9f9f9' : '#1e293b')};
   font-family: 'Roboto';
-  font-size: 16px;
+  font-size: 14px;
   font-weight: 600;
+  @media screen and (min-width: 768px) {
+    font-size: 18px;
+  }
 `;
 
 export const ViewCount = styled.p`
-  color: #616e7c;
+  color: ${(props) => (props.$darkTheme ? '#cbd5e1' : '#616e7c')};
   margin: 0px;
   font-family: 'Roboto';
-  font-size: 18px;
+  font-size: 16px;
   font-weight: 600;
+  @media screen and (min-width: 768px) {
+    font-size: 20px;
+  }
 `;

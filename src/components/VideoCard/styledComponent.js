@@ -41,7 +41,7 @@ export const Details = styled(ChannelDetails)`
   display: flex;
   align-items: center;
   width: 100%;
-  color: ${(props) => (props.$darkTheme ? '#475569' : '#606060')};
+  color: ${(props) => (props.$darkTheme ? '#e2e8f0' : '#606060')};
 `;
 
 export const Para = styled.p`

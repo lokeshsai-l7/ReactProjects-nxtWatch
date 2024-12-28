@@ -48,7 +48,7 @@ const Trending = () => {
         },
       });
       const { data } = response;
-      console.log(data);
+      //console.log(data);
       const updatedData = data.videos.map((eachObj) => ({
         channel: {
           name: eachObj.channel.name,
@@ -90,7 +90,7 @@ const Trending = () => {
 
   const renderDataContainer = () => (
     <DataContainer>
-      <RouteHeader name={'Trending'} icon={<HiFire />} />
+      <RouteHeader name="Trending" icon={<HiFire />} />
       <TrendingVideoContainer>{getVideosView()}</TrendingVideoContainer>
     </DataContainer>
   );

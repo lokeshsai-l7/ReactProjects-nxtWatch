@@ -22,7 +22,11 @@ export const NavList = styled.ul`
 export const ListItem = styled.li`
   padding: 10px 10px 10px 40px;
   background-color: ${(props) =>
-    props.$isActive ? props.$bgColor : 'transparent'};
+    props.$isActive
+      ? props.$darkTheme
+        ? '#383838'
+        : '#94a3b8'
+      : 'transparent'};
   display: flex;
   align-items: center;
   font-family: 'Roboto';
@@ -30,12 +34,19 @@ export const ListItem = styled.li`
 `;
 
 export const IconContainer = styled.div`
-  color: ${(props) => (props.$isActive ? '#FC0A0A' : props.$unselectedColor)};
+  color: ${(props) =>
+    props.$isActive ? '#FC0A0A' : props.$darkTheme ? '#f1f1f1' : ' #475569'};
 `;
 
 export const Text = styled.span`
   color: ${(props) =>
-    props.$isActive ? props.$selectedColor : props.$unSelectedColor};
+    props.$isActive
+      ? props.$darkTheme
+        ? '#ffffff'
+        : '#1e293b'
+      : props.$darkTheme
+      ? '#f1f1f1'
+      : ' #475569'};
   padding-left: 15px;
   font-weight: ${(props) => (props.$isActive ? '600' : '500')};
 `;

@@ -1,5 +1,4 @@
 import { Link } from 'react-router-dom';
-import { useState } from 'react';
 import { AiFillHome } from 'react-icons/ai';
 import { HiFire } from 'react-icons/hi';
 import { SiYoutubegaming } from 'react-icons/si';
@@ -49,9 +48,7 @@ const navList = [
 const SideNavbar = () => {
   const darkTheme = useRecoilValue(themeState);
   const [activeNavId, setActiveNavId] = useRecoilState(activeButtonAtom);
-  const selectedNavbarRouteBg = darkTheme ? '#383838' : '#94a3b8';
-  const selectedTextColor = darkTheme ? '#ffffff' : '#1e293b';
-  const unSelectedColor = darkTheme ? '#f1f1f1' : ' #475569';
+
   return (
     <SideNavBar $darkTheme={darkTheme}>
       <NavList>
@@ -60,20 +57,16 @@ const SideNavbar = () => {
             <ListItem
               onClick={() => setActiveNavId(each.id)}
               $isActive={each.id === activeNavId}
-              $bgColor={selectedNavbarRouteBg}
+              $darkTheme={darkTheme}
             >
               <IconContainer
                 $isActive={each.id === activeNavId}
-                $unselectedColor={unSelectedColor}
+                $darkTheme={darkTheme}
               >
                 <each.icon />
               </IconContainer>
 
-              <Text
-                $selectedColor={selectedTextColor}
-                $unSelectedColor={unSelectedColor}
-                $isActive={each.id === activeNavId}
-              >
+              <Text $darkTheme={darkTheme} $isActive={each.id === activeNavId}>
                 {each.displayText}
               </Text>
             </ListItem>

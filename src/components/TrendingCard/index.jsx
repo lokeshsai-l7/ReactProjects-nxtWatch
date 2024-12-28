@@ -14,7 +14,7 @@ import { useRecoilValue } from 'recoil';
 
 const TrendingCard = (props) => {
   const { videoData } = props;
-  const { darkTheme } = useRecoilValue(themeState);
+  const darkTheme = useRecoilValue(themeState);
   const { thumbnailUrl, channel, title, viewCount, publishedAt, id } =
     videoData;
   const date = formatDistanceToNow(new Date(publishedAt));
@@ -24,10 +24,10 @@ const TrendingCard = (props) => {
         <ThumbnailImg alt="Thumbnail" src={thumbnailUrl} />
         <ChannelDetails>
           <Title $darkTheme={darkTheme}>{title}</Title>
-          <Details $darkTheme={darkTheme}>
-            <Para>{channel.name}</Para>
-            <Para>{viewCount} Views</Para>
-            <Para>{date}</Para>
+          <Details>
+            <Para $darkTheme={darkTheme}>{channel.name}</Para>
+            <Para $darkTheme={darkTheme}>{viewCount} Views</Para>
+            <Para $darkTheme={darkTheme}>{date}</Para>
           </Details>
         </ChannelDetails>
       </Card>

@@ -9,3 +9,8 @@ export const activeButtonAtom = atom({
   key: 'activeButtonAtom',
   default: 'HOME',
 });
+
+export const savedVideosAtom = atom({
+  key: 'savedVideosAtom',
+  default: [],
+});

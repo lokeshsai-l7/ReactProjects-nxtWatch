@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { formatDistanceToNow } from 'date-fns';
+
 import {
   Card,
   ThumbnailImg,
@@ -9,16 +9,16 @@ import {
   Details,
   Title,
   Para,
+  SubCon,
 } from './styledComponent';
 import { themeState } from '../../recoil_state';
 import { useRecoilValue } from 'recoil';
 
-const VideoCard = (props) => {
+const SavedVideosCard = (props) => {
   const { videoDetails } = props;
   const darkTheme = useRecoilValue(themeState);
   const { thumbnailUrl, channel, title, viewCount, publishedAt, id } =
     videoDetails;
-  const date = formatDistanceToNow(new Date(publishedAt));
 
   return (
     <Link to={`/videos/${id}`}>
@@ -29,9 +29,11 @@ const VideoCard = (props) => {
           <ChannelDetails>
             <Title $darkTheme={darkTheme}>{title}</Title>
             <Details $darkTheme={darkTheme}>
-              <Para>{channel.name}</Para>
-              <Para>{viewCount} Views</Para>
-              <Para>{date}</Para>
+              <Para $name>{channel.name}</Para>
+              <SubCon>
+                <Para>{viewCount} Views</Para>
+                <Para>{publishedAt}</Para>
+              </SubCon>
             </Details>
           </ChannelDetails>
         </DetailsContainer>
@@ -40,4 +42,4 @@ const VideoCard = (props) => {
   );
 };
 
-export default VideoCard;
+export default SavedVideosCard;
